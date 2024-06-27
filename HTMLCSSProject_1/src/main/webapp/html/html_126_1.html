@@ -1,0 +1,61 @@
+<!--
+	  태그 , 전체 , 아이디 , 클래스
+	  ===   === =====  =====
+	  					.class {
+							  속성:값
+							  
+						  }
+	  			#아이디명 {
+					  속성:값,
+					  속성:값,
+					  속성:값,
+				  }
+	  		* {
+				  CSS속성 : 값
+				  => 사이트 글꼴 , margin / padding
+			  }
+	  태그명 {
+		  CSS속성 : 해당값
+	  }	
+	  
+	  속성 선택자
+	  =======
+	    선택자[속성명=값]
+	    
+	    input [type="text"]
+	    
+	    <input type="text">
+	    ***a[href="http://www.daum.net"]
+	    a[href^="http"] => http로 시작
+	    ***a[href$="net"] => net으로 끝
+	    ***a[href*="www"] => www가 포함된 문자열
+	    a[href|="gif|jpg"]
+	    <a href="http://www.daum.net">
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	input[type="submit"]{
+		border-radius: 10px;
+	}
+	input[type^="b"]{
+		background-color: red;
+	}
+	input[type$="t"]{
+		background-color: cadetblue;
+	}
+	input[type*="b"]{
+		
+	}
+</style>
+</head>
+<body>
+	<input type="text" size="20"><br>
+	<input type="button" value="Click"><br>
+	<input type="submit" value="방송"><br>
+	<input type="password" size="20"><br>
+</body>
+</html>

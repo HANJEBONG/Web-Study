@@ -1,0 +1,72 @@
+<!--
+	HTML => GET/PORT , 시멘텍
+	시멘텍 => HTML : 검색이 쉽게 만들어준 태그명
+	
+	예)
+	   <aaa> <name>
+	   <bbb> <sex>
+	   <ccc> <address>
+	   <ddd> <phone>
+	   <eee> <password> => 의미를 부여하는 태그
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	#wrap{
+		width: 800px;
+		height: 600px;
+		margin: 0px auto; /* 가운데 정렬*/
+		background-color: cornflowerblue;
+	}
+	header{
+		width: 800px;
+		height: 100px;
+		background-color: darkcyan;
+	}
+	aside{
+		width: 30%;
+		height: 400px;
+		background-color: rgb(255, 128, 128);
+		float: left;
+	}
+	section{
+		width: 70%;
+		height: 400px;
+		background-color: rgb(255, 128, 255);
+		float: left;
+	}
+	footer{
+		width: 800px;
+		height: 100px;
+		background-color: rgb(255, 128, 64);
+		float: both;
+	}
+</style>
+<!--
+	aside : 부메뉴 , 로그인 , 광고
+	================================
+	    header (로고,검색창)
+	================================
+		|
+  aside	|	section : 주내용 => 화면이 변경
+		|
+		|
+		|
+	================================
+		footer : 회사정보
+	================================
+-->
+</head>
+<body>
+	<div id="wrap">
+		<header></header>
+		<aside></aside>
+		<section></section>
+		<footer></footer>
+	</divwrap>
+</body>
+</html>
