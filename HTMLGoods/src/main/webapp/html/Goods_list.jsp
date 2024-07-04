@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.*,com.sist.dao.*"%>
  <%
+ 		 request.setCharacterEncoding("UTF-8");
  		 GoodsDAO dao=GoodsDAO.newInstance();
+ 		 
  		 int startPage;
  		 int endPage;
  		 String strpage=request.getParameter("page");
@@ -9,7 +11,7 @@
  			strpage="1";
  		 }
  		 int curpage=Integer.parseInt(strpage);
- 		 List<GoodsVO> list=dao.goodsListData(curpage);
+ 		
  		 
  		 int totalpage=dao.goodsTotal();
  		 final int BLOCK=5;
@@ -19,6 +21,19 @@
  		 if(endPage>totalpage){
  			 endPage=totalpage;
  		 }
+ 		String type=request.getParameter("type");
+ 	 	if(type==null){
+ 	 		type="1";
+ 	 	}
+ 	 	
+ 	 	List<GoodsVO> list=dao.goodsListData(Integer.parseInt(type),curpage);
+ 		
+ 	 	String find=request.getParameter("find");
+ 	 	if(find!=null){
+ 	 		
+ 	 		list=dao.goodsFindlist(Integer.parseInt(type), find, curpage);
+ 	 		//find=null;
+ 	 	}
  %>
 <!DOCTYPE html>
 <html>
@@ -44,12 +59,27 @@
 <body>
 	<div class="container">
 	  <div class="row">
+	    <form method="post" action="Goods_list.jsp;">
+	     <input type="text" name="find" size=20 class="input-sm" value="<%=find%>">
+	     <input type="submit" value="검색" class="btn-sm btn-danger">
+	    </form>
+	  </div>
+	  <div class="row">
+      <div class="text-center">
+        <a href="Goods_list.jsp?type=1" class="btn btn-lg btn-success">전체</a>
+        <a href="Goods_list.jsp?type=2" class="btn btn-lg btn-info">베스트</a>
+        <a href="Goods_list.jsp?type=3" class="btn btn-lg btn-warning">특가</a>
+        <a href="Goods_list.jsp?type=4" class="btn btn-lg btn-primary">신상품</a>
+      </div>
+      </div>
+      <div style="height: 20px"></div>
+	  <div class="row">
 	     <%
 	       for (GoodsVO vo:list){
 	     %>
 		 <div class="col-sm-3">
 		   <div class="thumnail">
-		     <a href="Goods_detail.jsp?no=<%=vo.getNo()%>">
+		     <a href="Goods_detail.jsp?no=<%=vo.getNo()%>&type=<%=type%>">
 		       <img src="<%=vo.getGoods_poster() %>" style="width: 240px; height: 200px" class="img-rounded">
 		       <p class="a"><%=vo.getGoods_name() %></p>
 		     </a>

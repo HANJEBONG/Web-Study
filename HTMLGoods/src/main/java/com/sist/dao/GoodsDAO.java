@@ -7,6 +7,7 @@ public class GoodsDAO {
 	private Connection conn;
 	private DataBaseConnection dbconn=new DataBaseConnection();
 	private static GoodsDAO dao;
+	private String[] mode= {"","goods_all","goods_best","goods_special","goods_new"};
 	
 	public static GoodsDAO newInstance() {
 		if(dao==null) {
@@ -45,14 +46,14 @@ GOODS_DELIVERY             VARCHAR2(26)
 GOODS_POSTER               VARCHAR2(4000) 
 HIT                        NUMBER(38)     
 	 */
-	public List<GoodsVO> goodsListData(int page){
+	public List<GoodsVO> goodsListData(int type,int page){
 		List<GoodsVO> list=new ArrayList<GoodsVO>();
 		try {
 			conn=dbconn.getConnection();
 			String sql="SELECT no,goods_name,goods_poster,num "
 					+ "FROM (SELECT no,goods_name,goods_poster,rownum as num "
 					+ "FROM (SELECT no,goods_name,goods_poster "
-					+ "FROM goods_all)) "
+					+ "FROM "+mode[type]+")) "
 					+ "WHERE num BETWEEN ? AND ?";
 			ps=conn.prepareStatement(sql);
 			int curpage=12;
@@ -79,11 +80,11 @@ HIT                        NUMBER(38)
 		return list;
 	}
 	
-	public GoodsVO goodsDetailData(int no) {
+	public GoodsVO goodsDetailData(int type,int no) {
 		GoodsVO vo=new GoodsVO();
 		try {
 			conn=dbconn.getConnection();
-			String sql="UPDATE goods_all SET "
+			String sql="UPDATE "+mode[type]+" SET "
 					+ "hit=hit+1 "
 					+ "WHERE no=?";
 			ps=conn.prepareStatement(sql);
@@ -91,7 +92,7 @@ HIT                        NUMBER(38)
 			ps.executeUpdate();
 			
 			sql="SELECT no,goods_discount,hit,goods_name,goods_sub,goods_price,goods_first_price,goods_delivery,goods_poster "
-				+ "FROM goods_all "
+				+ "FROM "+mode[type]+" "
 				+ "WHERE no=?";
 			ps=conn.prepareStatement(sql);
 			ps.setInt(1, no);
@@ -114,5 +115,39 @@ HIT                        NUMBER(38)
 			dbconn.disConnection(conn, ps);
 		}
 		return vo;
+	}
+	public List<GoodsVO> goodsFindlist(int choice,String fd,int page){
+		List<GoodsVO> list=new ArrayList<GoodsVO>();
+		try {
+			conn=dbconn.getConnection();
+			String sql="SELECT no,goods_name,goods_poster,num "
+					+ "FROM (SELECT no,goods_name,goods_poster,rownum as num "
+					+ "FROM (SELECT no,goods_name,goods_poster "
+					+ "FROM "+mode[choice]+" WHERE REGEXP_LIKE(goods_name,?))) "
+					+ "WHERE num BETWEEN ? AND ?";
+			ps=conn.prepareStatement(sql);
+			int curpage=12;
+			int start=(curpage*page)-(curpage-1);
+			int end=(curpage*page);
+			ps.setString(1, fd);
+			ps.setInt(2, start);
+			ps.setInt(3, end);
+			ResultSet rs=ps.executeQuery();
+			while(rs.next()) {
+				GoodsVO vo=new GoodsVO();
+				vo.setNo(rs.getInt(1));
+				vo.setGoods_name(rs.getString(2));
+				vo.setGoods_poster(rs.getString(3));
+				
+				list.add(vo);
+			}
+			rs.close();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}finally {
+			dbconn.disConnection(conn, ps);
+		}
+		return list;
 	}
 }
