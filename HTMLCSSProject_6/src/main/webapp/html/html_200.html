@@ -1,0 +1,47 @@
+<!--
+		지정된 영역을 벗어나는 경우
+		=> hidden / scroll
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	.a{
+		width: 100px;
+		height: 100px;
+		position: absolute;
+	}
+	.a:nth-child(2){
+		background-color: red;
+		left: 10px;
+		top: 10px;
+		z-index: 100;
+	}
+	:nth-child(4){
+		background-color: rgb(255, 128, 128);
+		left: 50px;
+		top: 50px;
+		z-index: 10;
+	}
+	:nth-child(5){
+		background-color: rgb(255, 0, 128);
+		left: 90px;
+		top: 90px;
+		z-index: 1;
+	}
+</style>
+</head>
+<body>
+	<h1>
+		"인도로 날아온 역주행 차"…CCTV에 포착된 시청역 
+	</h1>
+	<div class="a"></div>
+	<div class="a"></div>
+	<div class="a"></div>
+	<h1>
+		野최고위원도 ‘비명’소리 사라졌다[이런정치]
+	</h1>
+</body>
+</html>

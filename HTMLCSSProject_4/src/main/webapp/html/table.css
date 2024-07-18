@@ -1,0 +1,52 @@
+@charset "UTF-8";
+	.table_content{
+		border-top-width: 2px;
+		border-bottom-width: 1px;
+		border-top-style: solid;
+		border-bottom-style: solid;
+		border-top-color: black;
+		border-bottom-color: black;
+		border-collapse: collapse; /* 보더 라인선 통합*/
+	}
+	.table_content th,.table_content td{
+		margin: 0px;
+		padding: 8px;
+		font-size: 9pt;
+	}
+	.table_content th{
+		background-color: #999;
+		color: white;
+		border-width: 1px;
+	}
+	.table_content td{
+		border-bottom-width: 1px;
+		border-bottom-style: dotted;
+		border-bottom-color: #666;
+	}
+	/* 정렬 */
+	.table_content .tdleft{
+		text-align: left;
+	}
+	.table_content .tdcenter{
+		text-align: center;
+	}
+	.table_content .tdright{
+		text-align: right;
+	}
+	.table_content .Tr:hover{
+		cursor: pointer;
+		background-color: skyblue;
+	}
+	.table_content a{
+		color: black;
+		text-decoration: none;
+	}
+	.table_content a:hover{
+		color: darkgreen;
+		text-decoration: darkblue;
+	}
+	.table_content button,
+	.table_content select, 
+	.table_content input[type=text]{
+		border-radius: 20px;
+	}

@@ -1,0 +1,143 @@
+<!--
+		CSS
+		  1) 텍스트 관련 스타일
+		  	 font-family: 글꼴 변경
+		  	 	=> font-family:글꼴,글꼴...
+		  	 	   시스템 내장 , @import('') => 외부에서 읽어오는 경우
+		  	 font-size: 단위 => px , em(배수)
+		  	 font-weight: bold => 강조
+		  	 color : 글자 색상
+		  	 text-decoration : none|underline|overline|line-through
+		  	 =============== <a> 변경
+			 text-transform: none|uppercase|lowercase (사용빈도는 거의 없다) => 로고
+			 white-space: pre-wrap : 자동 줄바꿈
+			 word-spacing : 글자 간격
+			 text-align : left|right|center
+			 
+			 => color
+			 	  1) 지정된 색상 => cyan , yellow ...
+			 	  2) rgb (red,green,blue) => 255를 초과할 수 없다
+			 	  3) rgba (red,green,blue,alpha)
+			 	  						  ====== 투명 : 0.0~1.0 (opacity:)
+		  2) background : 배경이미지/배경 색상
+		  	 background-color
+		  	 background-image:url('경로명')
+		  	 ================ 그림이 작은 경우 => 반복한다 => no-repeat
+		  	 background-size:width값,height값
+		  	 				 => cover
+		  3) 목록
+		  	 list-style-type:none (desc|cycle) => ul , ol
+		  	 => 메뉴 제작
+		  4) 가시성
+		  	 display:none(숨김) => block | inline | inline-block(width,height)
+		  	 => display:table-row(tr)|table-cell(td)
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	#wrapper{
+		border: 5px solid yellow;
+		width: 500px;
+		margin-left: 150px;
+		border-radius: 10px;
+	}
+	#joinForm{
+		display: table;
+		margin: 10px auto;
+		border-collapse: collapse;
+	}
+	#joinForm h1{
+		display: table-caption;
+		font-size: 15px;
+		padding: 5px;
+		margin-bottom: 10px;
+		width: 450px;
+	}
+	#joinForm h1 span{
+		text-align: center;
+		background-color: black;
+		color: white;
+		padding: 5px;
+		margin: 0px auto;
+	}
+	#joinForm p{
+		display: table-row;
+		padding: 5px;
+		border-bottom: 1px solid gray;
+	}
+	#joinForm label{
+		display: table-cell;
+		padding-left: 10px;
+	}
+	#joinForm #id{
+		width: 100px;
+	}
+	#joinForm #pwd{
+		width: 100px;
+	}
+	#joinForm #name{
+		width: 100px;
+	}
+	#joinForm .cellstyle{
+		display: table-cell;
+		padding-left: 5px;
+	}
+</style>
+</head>
+<body>
+	<!--
+		bootstrap : 전체 영역 => container : 960px , container-fiuld > full
+	-->
+  <div id="wrapper">
+	  <!--
+		  form: => 전송할 데이터를 모아서 한번에 서버로 전송
+		  = method : 전송방식
+		  			 GET : URL뒤에 데이터를 첨부해서 전송
+		  			 	   http~~/폴더명/파일명?변수=값
+		  			 	   http~~/폴더명/파일명?변수=값&변수=값...
+		  			 	   					   	=
+		  			 	   화면이동 => 필요시 데이터 전송
+		  			 	     a.html => b.jsp
+		  			 	    html
+		  			 	      => <form>,<a>
+									    => GET => ?
+								  => GET/POST
+		  			 	    javascript
+		  			 	      => location.href="이동할 파일명?변수=값"
+		  			 	    java
+		  			 	      => sendRedirect("이동할 팡ㄹ?변수=값")
+		  			 	    => URL 뒤에 첨부하기 때문에 데이터 노출이 있다 (보안 취약)
+		  			 	      => page , 단순한 검색어
+		  			 	    => method를 사용하지 않는 경우 => GET(default)
+		  			 POST : 내부 네트워크를 통해서 데이터 전송 : 노출이 없다 (보안)
+		  			 		=> 전송할 데이터가 많거나 , 보안 유지
+		  			 			=> 글쓰기 , 회원가입 , 회원수정 , 로그인
+		  			 PUT
+		  			 DELETE
+		  			 ====================== RestFul
+		  			 GET: 검색 , POST : INSERT , PUT : UPDATE , DELETE : DELETE
+		  			 ========================================================= React (CRUD)
+		  = action : 데이터를 받는 파일명 저장
+		  = input 태그
+	  -->
+	  <form id="joinForm">
+		  <h1><span>회원가입</span></h1>
+		  <p>
+			  <label for="id">id</label>
+			  <input type="text" id="id" class="cellStyle">
+		  </p>
+		    <p>
+			  <label for="pwd">Password</label>
+			  <input type="password" id="pwd" class="cellStyle">
+		  </p>
+		    <p>
+			  <label for="name">name</label>
+			  <input type="text" id="name" class="cellStyle">
+		  </p>
+	  </form>
+  </div>
+</body>
+</html>
